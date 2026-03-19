@@ -1,26 +1,29 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import BackgroundOverlay from "./components/BackgroundOverlay.jsx";
-import Login from "./pages/Login.jsx";
-import Register from "./pages/Register.jsx";
-import Home from "./pages/Home.jsx";
-import Activity from "./pages/Activity.jsx";
-import Aula from "./pages/Aula.jsx";
-import Progress from "./pages/Progress.jsx";
-import Profile from "./pages/Profile.jsx";
+import AnimatedBackground from "./components/layout/AnimatedBackground.jsx";
+import LoginScreen from "./screens/auth/LoginScreen.jsx";
+import RegisterScreen from "./screens/auth/RegisterScreen.jsx";
+import HomeScreen from "./screens/main/HomeScreen.jsx";
+import LessonsScreen from "./screens/main/LessonsScreen.jsx";
+import ProgressScreen from "./screens/main/ProgressScreen.jsx";
+import ClassScreen from "./screens/main/ClassScreen.jsx";
+import ProfileScreen from "./screens/main/ProfileScreen.jsx";
 
-export default function App(){
+export default function App() {
   return (
-    <BackgroundOverlay>
+    <>
+      <AnimatedBackground />
       <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/activity/:id" element={<Activity />} />
-        <Route path="/aula" element={<Aula />} />
-        <Route path="/progress" element={<Progress />} />
-        <Route path="/profile" element={<Profile />} />
+        {/* Auth */}
+        <Route path="/" element={<LoginScreen />} />
+        <Route path="/register" element={<RegisterScreen />} />
+        {/* Main */}
+        <Route path="/home" element={<HomeScreen />} />
+        <Route path="/lessons" element={<LessonsScreen />} />
+        <Route path="/progress" element={<ProgressScreen />} />
+        <Route path="/class" element={<ClassScreen />} />
+        <Route path="/profile" element={<ProfileScreen />} />
       </Routes>
-    </BackgroundOverlay>
+    </>
   );
 }
