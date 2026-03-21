@@ -7,32 +7,30 @@ export default defineConfig({
     react(),
     VitePWA({
       registerType: "autoUpdate",
-      injectRegister: "auto",
-      includeAssets: ["pwa-192x192.png", "pwa-512x512.png"],
       manifest: {
+        id: "/",
         name: "AI Tutor Languages",
         short_name: "AI Tutor",
         description: "Seu professor particular de idiomas interativo",
+        start_url: "/",
+        scope: "/",
+        display: "standalone",
         theme_color: "#7c7ae6",
         background_color: "#ffffff",
-        display: "standalone",
         icons: [
           {
             src: "/pwa-192x192.png",
             sizes: "192x192",
-            type: "image/png",
+            type: "image/png"
           },
           {
             src: "/pwa-512x512.png",
             sizes: "512x512",
             type: "image/png",
             purpose: "any maskable"
-          },
-        ],
-      },
-      workbox: {
-        globPatterns: ["**/*.{js,css,html,ico,png,svg,jpg,jpeg,webp}"],
-      },
+          }
+        ]
+      }
     }),
   ],
 });
