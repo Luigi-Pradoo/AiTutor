@@ -18,7 +18,23 @@ const DEFAULT_USER = {
   lastActiveDate: null,
 };
 
+const THEME_KEY = "aiTutor_theme";
+
 export function UserProvider({ children }) {
+  const [darkMode, setDarkMode] = useState(() => {
+    return localStorage.getItem(THEME_KEY) === "dark";
+  });
+
+  // Apply theme class to <html>
+  useEffect(() => {
+    if (darkMode) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+    localStorage.setItem(THEME_KEY, darkMode ? "dark" : "light");
+  }, [darkMode]);
+
   const [user, setUser] = useState(() => {
     try {
       const saved = localStorage.getItem(STORAGE_KEY);
@@ -58,6 +74,10 @@ export function UserProvider({ children }) {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(user));
   }, [user]);
 
+  const toggleDarkMode = () => {
+    setDarkMode(prev => !prev);
+  };
+
   const updateUser = (fields) => {
     setUser((prev) => ({ ...prev, ...fields }));
   };
@@ -82,7 +102,7 @@ export function UserProvider({ children }) {
   };
 
   return (
-    <UserContext.Provider value={{ user, updateUser, addProgress }}>
+    <UserContext.Provider value={{ user, updateUser, addProgress, darkMode, toggleDarkMode }}>
       {children}
     </UserContext.Provider>
   );

@@ -17,7 +17,7 @@ const LogOutIcon = () => <svg width="20" height="20" viewBox="0 0 24 24" fill="n
 const LANGUAGES = ["Inglês", "Espanhol", "Francês", "Alemão", "Italiano", "Japonês", "Coreano", "Mandarim"];
 
 export default function ProfileScreen() {
-  const { user, updateUser } = useUser();
+  const { user, updateUser, darkMode, toggleDarkMode } = useUser();
   const navigate = useNavigate();
 
   // Editable profile fields
@@ -209,21 +209,18 @@ export default function ProfileScreen() {
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", color: "var(--text-primary)" }}>
               <span style={{ fontSize: "14px" }}>Tema Escuro</span>
               <button
-                onClick={() => {
-                  const isDark = document.documentElement.classList.toggle("dark");
-                  localStorage.setItem("aiTutor_theme", isDark ? "dark" : "light");
-                }}
+                onClick={toggleDarkMode}
                 style={{
                   width: "44px", height: "24px", borderRadius: "12px",
                   border: "none", cursor: "pointer",
-                  background: document.documentElement.classList.contains("dark") ? "#7c7ae6" : "#ccc",
+                  background: darkMode ? "#7c7ae6" : "#ccc",
                   position: "relative", transition: "background 0.3s",
                 }}
               >
                 <div style={{
                   width: "18px", height: "18px", borderRadius: "50%",
                   background: "#fff", position: "absolute", top: "3px",
-                  left: document.documentElement.classList.contains("dark") ? "23px" : "3px",
+                  left: darkMode ? "23px" : "3px",
                   transition: "left 0.3s",
                   boxShadow: "0 1px 3px rgba(0,0,0,0.2)",
                 }} />
